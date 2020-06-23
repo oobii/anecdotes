@@ -16,6 +16,14 @@ const App = (props) => {
   const [selected, setSelected] = useState(Math.floor(Math.random() * count))
   const [votes,setVote] = useState({0:0,1:0,2:0,3:0,4:0,5:0})
 
+  let most = 0
+  for( const [key, value] of Object.entries(votes)) {
+    if(votes[key] >= votes[most]) {
+      most = key
+    }
+    //console.log(`${key} : ${value}`)
+  }
+
   const handleNextAnecdote = () => {
     const indx = Math.floor(Math.random() * count)
     console.log(indx);
@@ -39,6 +47,9 @@ const App = (props) => {
       <br></br>
       <Button text="vote" handle={handleVote} />
       <Button text="next anecdote" handle={handleNextAnecdote} />
+      <br></br>
+      <h3>Anecdote with most votes:</h3>
+      {props.anecdotes[most]}
       
       
     </div>
